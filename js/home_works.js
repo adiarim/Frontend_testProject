@@ -14,20 +14,66 @@ gmailBtn.addEventListener("click", () => {
     }
 });
 
-// recuesAnimationFrame //ограничение поставить
+// recuestAnimationFrame //ограничение поставить
 // (.style.left=${переменная}px).  
 
 const childBlock = document.querySelector(".child_block");
 const parentBlock = document.querySelector(".parent_block");
 
-let position = 0;
+let positionX = 0;
+let positionY = 0;
 
-function moveBlock() {
-    if (position < parentBlock.offsetWidth - childBlock.offsetWidth) {
-        position++;
-        childBlock.style.left = `${position}px`;
+const width = parentBlock.clientWidth - childBlock.offsetWidth;
+const height = parentBlock.clientHeight - childBlock.offsetHeight;
+
+const moveBlock = () => {
+    if(positionX < width && positionY === 0) {
+        positionX++;
+        childBlock.style.left = `${positionX}px`;
+        requestAnimationFrame(moveBlock);
+    } else if(positionX >= width && positionY < height) {
+        positionY++;
+        childBlock.style.top = `${positionY}px`;
+        requestAnimationFrame(moveBlock);
+    } else if(positionY >= height && positionX > 0) {
+        positionX--;
+        childBlock.style.left = `${positionX}px`;
+        requestAnimationFrame(moveBlock);
+    } else if(positionX <= 0 && positionY > 0) {
+        positionY--;
+        childBlock.style.top = `${positionY}px`;
         requestAnimationFrame(moveBlock);
     }
 }
 
-moveBlock()
+moveBlock();
+
+
+
+const time = document.querySelector("#seconds");
+const startBtn = document.querySelector("#start");
+const stopBtn = document.querySelector("#stop");
+const resetBtn = document.querySelector("#reset");
+
+let interval = null;
+let count = 0;
+
+startBtn.addEventListener('click', () => {
+    if(interval) return;
+    interval = setInterval(() => {
+        count++;
+        time.innerText = count;
+    }, 1000)
+})
+
+stopBtn.addEventListener('click', () => {
+    clearInterval(interval);
+    interval = null;
+})
+
+resetBtn.addEventListener('click', () => {
+    clearInterval(interval);
+    interval = null;
+    count = 0;
+    time.innerText = count;
+})
