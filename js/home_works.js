@@ -46,7 +46,7 @@ const moveBlock = () => {
     }
 }
 
-moveBlock();
+moveBlock()
 
 
 
@@ -77,3 +77,6 @@ resetBtn.addEventListener('click', () => {
     count = 0;
     time.innerText = count;
 })
+
+
+
