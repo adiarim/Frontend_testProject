@@ -1,17 +1,22 @@
 [
-  {
-    "name": "",
-    "age": 0,
-    "photo": "url"
-  },
-  {
-    "name": "",
-    "age": 0,
-    "photo": "url"
-  },
-  {
-    "name": "",
-    "age": 0,
-    "photo": "url"
-  }
+{
+  "name": "Jake Sully",
+  "age": 42,
+  "photo": "https://i.pinimg.com/736x/82/63/6e/82636e061f8065bf1960ee9312dcc791.jpg"
+},
+{
+  "name": "Piter Parker",
+  "age": 20,
+  "photo": "https://upload.wikimedia.org/wikipedia/en/0/0f/Tom_Holland_as_Spider-Man.jpg"
+},
+{
+  "name": "Dustin Henderson",
+  "age": 18,
+  "person_photo": "https://i.pinimg.com/736x/a5/16/37/a51637a46b854ba0b17b3d45217feddc.jpg"
+},
+{
+  "name": "Neteyam",
+  "age": 17,
+  "photo": "https://i.pinimg.com/originals/75/91/71/759171dad384bfb39c32a7a0374a7945.png"
+}
 ]
