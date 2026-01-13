@@ -155,3 +155,63 @@ const converter = (element) => {
 converter(somInput)
 converter(usdInput)
 converter(eurInput)
+
+const nextBtn = document.querySelector("#btn-next");
+const card = document.querySelector(".card");
+const prevBtn = document.querySelector("#btn-prev");
+
+const TODOS_API = 'https://jsonplaceholder.typicode.com/todos'
+const MAX_TODOS = 200;
+
+let todoId = 1;
+
+const fetcherTodos = (id) => {
+    fetch(`${TODOS_API}/${id}`)
+      .then(response => {
+        if(response.status !== 200){
+            card.innerHTML=`
+            <p style="color: red">Error occured</>
+            `
+        }else{
+            return response.json();
+        }
+      })
+      .then(data => {
+      const {id, title, completed} = data;
+      const color = completed ? 'green' : 'red';
+      card.style.borderColor = color;
+        card.innerHTML = `
+        <p>ID: ${id}</p>
+        <p>Title -> ${title}</p>
+        <p style="color: ${color}">Status -> ${completed ? 'finished' : 'pendind'}</p>
+        `
+      })
+}
+
+fetcherTodos(1);
+
+nextBtn.addEventListener('click', () => {
+    if (todoId >= MAX_TODOS) {
+        todoId = 1;
+    } else {
+        todoId++;
+    }
+    fetcherTodos(todoId);
+})
+
+prevBtn.addEventListener('click', () => {
+    if (todoId <= 1) {
+        todoId = MAX_TODOS;
+    } else {
+        todoId--;
+    }
+    fetcherTodos(todoId);
+})
+
+fetch('https://jsonplaceholder.typicode.com/posts')
+.then((response) => response.json())
+.then((data) => console.log(data));
+
+
+
+
