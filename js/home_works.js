@@ -79,38 +79,31 @@ resetBtn.addEventListener('click', () => {
 })
 
 const list = document.querySelector('.characters-list');
-
-const requester = new XMLHttpRequest();
-requester.open('GET', '../data/characters.json');
-requester.setRequestHeader('Content-Type', 'application/json');
-requester.send();
-
 const defaultImg = "https://i.pinimg.com/736x/2f/15/f2/2f15f2e8c688b3120d3d26467b06330c.jpg";
 
-requester.onload = () => {
-    const data = JSON.parse(requester.response);
-    list.innerHTML = ""
+const renderCharacters = async () => {
+    const response = await fetch('../data/characters.json');
+    const data = await response.json();
+    
+    list.innerHTML = "";
     data.forEach((person) => {
         const card = document.createElement('div');
         card.classList.add("character-card");
-        card.innerHTML =`
-        <img src="${person.photo ?? defaultImg}" alt="${person.name}">
-        <h3>${person.name}</h3>
-        <p>Age: ${person.age}</p>
-        `
-
+        card.innerHTML = `
+            <img src="${person.photo ?? defaultImg}" alt="${person.name}">
+            <h3>${person.name}</h3>
+            <p>Age: ${person.age}</p>
+        `;
         list.append(card);
     });
-}
+};
 
-const bio = new XMLHttpRequest();
-bio.open('GET', '../data/bio.json');
-bio.setRequestHeader('Content-Type', 'application/json');
-bio.send();
-
-bio.onload = () => {
-    const data = JSON.parse(bio.response);
+const fetchBio = async () => {
+    const response = await fetch('../data/bio.json');
+    const data = await response.json();
     console.log(data);
-}
+};
 
+renderCharacters();
+fetchBio();
 
